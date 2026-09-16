@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宗师之上-0.1折</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+ background: linear-gradient(rgba(10,6,25,0.8),rgba(26,15,48,0.9));
+ background-image: url('bg.jpg');
+ background-repeat: no-repeat;
+ background-position: center;
+ background-size: cover;
+ background-attachment: fixed;
+ color:#fff;
+ font-family:微软雅黑;
+ text-align:center;
+ padding:30px 20px;
+ min-height:100vh;
+}
+.main{
+ max-width:700px;
+ margin:0 auto;
+ background:rgba(0,0,0,0.55);
+ border-radius:20px;
+ padding:40px 20px;
+ border:2px solid #d4af37;
+}
+h1{
+ font-size:36px;
+ color:#ffd700;
+ margin-bottom:20px;
+}
+.info{
+ font-size:16px;
+ color:#eee;
+ margin-bottom:40px;
+ line-height:1.7;
+}
+.welfare{
+ background:rgba(212,175,55,0.15);
+ border-radius:15px;
+ padding:25px 15px;
+ margin:25px 0;
+ text-align:left;
+ line-height:1.8;
+ font-size:15px;
+ border:1px solid #d4af37;
+}
+.welfare h3{
+ color:#ffd700;
+ text-align:center;
+ margin-bottom:15px;
+ font-size:18px;
+}
+.btn{
+ display:block;
+ width:85%;
+ height:55px;
+ line-height:55px;
+ background:#b8860b;
+ color:#fff;
+ font-size:18px;
+ border-radius:12px;
+ margin:14px auto;
+ text-decoration:none;
+ transition: background 0.3s;
+ border:none;
+ cursor:pointer;
+}
+.btn:hover{
+ background:#9b7007;
+}
+/* 弹窗样式 */
+.modal-mask{
+ display:none;
+ position:fixed;
+ top:0;left:0;
+ width:100%;height:100%;
+ background:rgba(0,0,0,0.75);
+ z-index:999;
+ align-items:center;
+ justify-content:center;
+ padding:20px;
+}
+.modal-box{
+ background:#1a1430;
+ border:2px solid #d4af37;
+ border-radius:16px;
+ max-width:520px;
+ width:100%;
+ padding:24px;
+}
+.modal-box h2{
+ color:#ffd700;
+ margin-bottom:16px;
+ font-size:20px;
+}
+.code-textarea{
+ width:100%;
+ min-height:160px;
+ background:#0c0820;
+ color:#fff;
+ border:1px solid #d4af37;
+ border-radius:10px;
+ padding:12px;
+ font-size:15px;
+ line-height:1.6;
+ resize:none;
+}
+.modal-buttons{
+ margin-top:16px;
+ display:flex;
+ gap:12px;
+}
+.modal-btn{
+ flex:1;
+ height:48px;
+ border-radius:10px;
+ border:none;
+ font-size:16px;
+ cursor:pointer;
+}
+.copy-btn{
+ background:#b8860b;
+ color:#fff;
+}
+.close-btn{
+ background:#444;
+ color:#fff;
+}
+.tip-text{
+ color:#7cf07c;
+ margin-top:10px;
+ display:none;
+}
+</style>
+</head>
+<body>
+<div class="main">
+ <h1>宗师之上</h1>
+ <p class="info">
+  国风修仙 · 放置挂机 · 问鼎宗师<br>
+  上线送海量仙玉｜金色仙宠｜专属礼包福利
+ </p>
+ <div class="welfare">
+ <h3>🎁 宗师之上永久兑换码</h3>
+ <p>ZSZS555：代金券18.8万，金色武学自选*20，武学经验·金*50</p>
+ <p>ZSZS666：灵玉88888，寻宝券100，红色武学箱*3等</p>
+ <p>ZSZS777：灵玉66666，寻宝券100，代金券*18800等</p>
+ <p>更多兑换码：ZSZS888，ZSZS999，ZSZS7878等</p>
+<p>其余兑换码点击下方链接</p>
+ <br>
+ <p>💴 充值比例：1¥=1000代金券</p>
+ <br>
+ <p>⚠️ 领取提醒：兑换码在游戏内【头像-兑换码】兑换，全区全服通用</p>
+ </div>
+ <!-- 打开弹窗按钮 -->
+ <button class="btn" id="openModalBtn">📋全部兑换码</button>
+ <a href="https://ss.pinda.im/ZSZS.html" class="btn">📥 下载地址</a>
+ <a href="https://zsadmin.okbkw.com/index/index/reg.html?agent=1546" class="btn">👤注册链接</a>
+ <a href="https://zs2.okbkw.com/" class="btn">💰 充值商城</a>
+<a href=" http://zs22.okbkw.com" class="btn">👧玩家中心</a>
+ <a href="https://qm.qq.com/q/Erd1orKvlK" class="btn">📱 玩家Q群</a>
+ <a href="https://1546503875-byte.github.io/zhongxin" class="btn">🎮更多游戏</a>
+</div>
+<!-- 弹窗DOM -->
+<div class="modal-mask" id="modalMask">
+ <div class="modal-box">
+ <h2>全部兑换码（直接复制）</h2>
+ <textarea class="code-textarea" id="codeArea" readonly>
+每日福利：
+中文兑换码
+天地法则---灵玉*3888
+得道飞升---强化粉尘·蓝*500/升星石*1
+永久兑换码
+ZSZS555
+ZSZS666
+ZSZS777
+ZSZS888
+ZSZS999
+ZSZS7878
+ZSZS6868
+ </textarea>
+ <div class="modal-buttons">
+ <button class="modal-btn copy-btn" id="copyBtn">📋复制兑换码</button>
+ <button class="modal-btn close-btn" id="closeBtn">关闭</button>
+ </div>
+ <div class="tip-text" id="copyTip">✅复制成功！去游戏粘贴兑换</div>
+ </div>
+</div>
+<script>
+const modalMask = document.getElementById('modalMask');
+const openModalBtn = document.getElementById('openModalBtn');
+const closeBtn = document.getElementById('closeBtn');
+const copyBtn = document.getElementById('copyBtn');
+const codeArea = document.getElementById('codeArea');
+const copyTip = document.getElementById('copyTip');
+//打开弹窗
+openModalBtn.onclick = function(){
+ modalMask.style.display = 'flex';
+ copyTip.style.display = 'none';
+}
+//关闭弹窗
+closeBtn.onclick = function(){
+ modalMask.style.display = 'none';
+}
+//点击遮罩关闭
+modalMask.onclick = function(e){
+ if(e.target === modalMask){
+ modalMask.style.display = 'none';
+ }
+}
+//复制功能
+copyBtn.onclick = async function(){
+ try{
+ await navigator.clipboard.writeText(codeArea.value.trim());
+ copyTip.style.display = 'block';
+ }catch(err){
+ //降级复制方案
+ codeArea.select();
+ document.execCommand('copy');
+ copyTip.style.display = 'block';
+ }
+}
+</script>
+</body>
+</html>
